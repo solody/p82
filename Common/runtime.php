@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 
 /**
- * ThinkPHP ÔËĞĞÊ±ÎÄ¼ş ±àÒëºó²»ÔÙ¼ÓÔØ
+ * ThinkPHP è¿è¡Œæ—¶æ–‡ä»¶ ç¼–è¯‘åä¸å†åŠ è½½
  * @category   Think
  * @package  Common
  * @author   liu21st <liu21st@gmail.com>
@@ -19,10 +19,10 @@ function gfddddafumds($string){return base64_decode(base64_decode(base64_decode(
 defined('THINK_PATH') or exit();
 if(version_compare(PHP_VERSION,'5.2.0','<'))  die('require PHP > 5.2.0 !');
 
-//  °æ±¾ĞÅÏ¢
+//  ç‰ˆæœ¬ä¿¡æ¯
 define('THINK_VERSION', '3.1');
 
-//   ÏµÍ³ĞÅÏ¢
+//   ç³»ç»Ÿä¿¡æ¯
 if(version_compare(PHP_VERSION,'5.3.0','<')) {
     set_magic_quotes_runtime(0);
     define('MAGIC_QUOTES_GPC',get_magic_quotes_gpc()?True:False);
@@ -33,14 +33,14 @@ define('IS_CGI',substr(PHP_SAPI, 0,3)=='cgi' ? 1 : 0 );
 define('IS_WIN',strstr(PHP_OS, 'WIN') ? 1 : 0 );
 define('IS_CLI',PHP_SAPI=='cli'? 1   :   0);
 
-// ÏîÄ¿Ãû³Æ
+// é¡¹ç›®åç§°
 defined('APP_NAME') or define('APP_NAME', basename(dirname($_SERVER['SCRIPT_FILENAME'])));
 
 if(!IS_CLI) {
-    // µ±Ç°ÎÄ¼şÃû
+    // å½“å‰æ–‡ä»¶å
     if(!defined('_PHP_FILE_')) {
         if(IS_CGI) {
-            //CGI/FASTCGIÄ£Ê½ÏÂ
+            //CGI/FASTCGIæ¨¡å¼ä¸‹
             $_temp  = explode('.php',$_SERVER['PHP_SELF']);
             define('_PHP_FILE_',    rtrim(str_replace($_SERVER['HTTP_HOST'],'',$_temp[0].'.php'),'/'));
         }else {
@@ -48,7 +48,7 @@ if(!IS_CLI) {
         }
     }
     if(!defined('__ROOT__')) {
-        // ÍøÕ¾URL¸ùÄ¿Â¼
+        // ç½‘ç«™URLæ ¹ç›®å½•
         if( strtoupper(APP_NAME) == strtoupper(basename(dirname(_PHP_FILE_))) ) {
             $_root = dirname(dirname(_PHP_FILE_));
         }else {
@@ -57,92 +57,92 @@ if(!IS_CLI) {
         define('__ROOT__',   (($_root=='/' || $_root=='\\')?'':$_root));
     }
 
-    //Ö§³ÖµÄURLÄ£Ê½
-    define('URL_COMMON',      0);   //ÆÕÍ¨Ä£Ê½
-    define('URL_PATHINFO',    1);   //PATHINFOÄ£Ê½
-    define('URL_REWRITE',     2);   //REWRITEÄ£Ê½
-    define('URL_COMPAT',      3);   // ¼æÈİÄ£Ê½
+    //æ”¯æŒçš„URLæ¨¡å¼
+    define('URL_COMMON',      0);   //æ™®é€šæ¨¡å¼
+    define('URL_PATHINFO',    1);   //PATHINFOæ¨¡å¼
+    define('URL_REWRITE',     2);   //REWRITEæ¨¡å¼
+    define('URL_COMPAT',      3);   // å…¼å®¹æ¨¡å¼
 }
 
-// Â·¾¶ÉèÖÃ ¿ÉÔÚÈë¿ÚÎÄ¼şÖĞÖØĞÂ¶¨Òå ËùÓĞÂ·¾¶³£Á¿¶¼±ØĞëÒÔ/ ½áÎ²
-defined('CORE_PATH')    or define('CORE_PATH',      THINK_PATH.'Lib/'); // ÏµÍ³ºËĞÄÀà¿âÄ¿Â¼
-defined('EXTEND_PATH')  or define('EXTEND_PATH',    THINK_PATH.'Extend/'); // ÏµÍ³À©Õ¹Ä¿Â¼
-defined('MODE_PATH')    or define('MODE_PATH',      EXTEND_PATH.'Mode/'); // Ä£Ê½À©Õ¹Ä¿Â¼
-defined('ENGINE_PATH')  or define('ENGINE_PATH',    EXTEND_PATH.'Engine/'); // ÒıÇæÀ©Õ¹Ä¿Â¼
-defined('VENDOR_PATH')  or define('VENDOR_PATH',    EXTEND_PATH.'Vendor/'); // µÚÈı·½Àà¿âÄ¿Â¼
-defined('LIBRARY_PATH') or define('LIBRARY_PATH',   EXTEND_PATH.'Library/'); // À©Õ¹Àà¿âÄ¿Â¼
-defined('COMMON_PATH')  or define('COMMON_PATH',    APP_PATH.'Common/'); // ÏîÄ¿¹«¹²Ä¿Â¼
-defined('LIB_PATH')     or define('LIB_PATH',       APP_PATH.'Lib/'); // ÏîÄ¿Àà¿âÄ¿Â¼
-defined('CONF_PATH')    or define('CONF_PATH',      APP_PATH.'Conf/'); // ÏîÄ¿ÅäÖÃÄ¿Â¼
-defined('LANG_PATH')    or define('LANG_PATH',      APP_PATH.'Lang/'); // ÏîÄ¿ÓïÑÔ°üÄ¿Â¼
-defined('TMPL_PATH')    or define('TMPL_PATH',      APP_PATH.'Tpl/'); // ÏîÄ¿Ä£°åÄ¿Â¼
-defined('HTML_PATH')    or define('HTML_PATH',      APP_PATH.'Html/'); // ÏîÄ¿¾²Ì¬Ä¿Â¼
-defined('LOG_PATH')     or define('LOG_PATH',       RUNTIME_PATH.'Logs/'); // ÏîÄ¿ÈÕÖ¾Ä¿Â¼
-defined('TEMP_PATH')    or define('TEMP_PATH',      RUNTIME_PATH.'Temp/'); // ÏîÄ¿»º´æÄ¿Â¼
-defined('DATA_PATH')    or define('DATA_PATH',      RUNTIME_PATH.'Data/'); // ÏîÄ¿Êı¾İÄ¿Â¼
-defined('CACHE_PATH')   or define('CACHE_PATH',     RUNTIME_PATH.'Cache/'); // ÏîÄ¿Ä£°å»º´æÄ¿Â¼
+// è·¯å¾„è®¾ç½® å¯åœ¨å…¥å£æ–‡ä»¶ä¸­é‡æ–°å®šä¹‰ æ‰€æœ‰è·¯å¾„å¸¸é‡éƒ½å¿…é¡»ä»¥/ ç»“å°¾
+defined('CORE_PATH')    or define('CORE_PATH',      THINK_PATH.'Lib/'); // ç³»ç»Ÿæ ¸å¿ƒç±»åº“ç›®å½•
+defined('EXTEND_PATH')  or define('EXTEND_PATH',    THINK_PATH.'Extend/'); // ç³»ç»Ÿæ‰©å±•ç›®å½•
+defined('MODE_PATH')    or define('MODE_PATH',      EXTEND_PATH.'Mode/'); // æ¨¡å¼æ‰©å±•ç›®å½•
+defined('ENGINE_PATH')  or define('ENGINE_PATH',    EXTEND_PATH.'Engine/'); // å¼•æ“æ‰©å±•ç›®å½•
+defined('VENDOR_PATH')  or define('VENDOR_PATH',    EXTEND_PATH.'Vendor/'); // ç¬¬ä¸‰æ–¹ç±»åº“ç›®å½•
+defined('LIBRARY_PATH') or define('LIBRARY_PATH',   EXTEND_PATH.'Library/'); // æ‰©å±•ç±»åº“ç›®å½•
+defined('COMMON_PATH')  or define('COMMON_PATH',    APP_PATH.'Common/'); // é¡¹ç›®å…¬å…±ç›®å½•
+defined('LIB_PATH')     or define('LIB_PATH',       APP_PATH.'Lib/'); // é¡¹ç›®ç±»åº“ç›®å½•
+defined('CONF_PATH')    or define('CONF_PATH',      APP_PATH.'Conf/'); // é¡¹ç›®é…ç½®ç›®å½•
+defined('LANG_PATH')    or define('LANG_PATH',      APP_PATH.'Lang/'); // é¡¹ç›®è¯­è¨€åŒ…ç›®å½•
+defined('TMPL_PATH')    or define('TMPL_PATH',      APP_PATH.'Tpl/'); // é¡¹ç›®æ¨¡æ¿ç›®å½•
+defined('HTML_PATH')    or define('HTML_PATH',      APP_PATH.'Html/'); // é¡¹ç›®é™æ€ç›®å½•
+defined('LOG_PATH')     or define('LOG_PATH',       RUNTIME_PATH.'Logs/'); // é¡¹ç›®æ—¥å¿—ç›®å½•
+defined('TEMP_PATH')    or define('TEMP_PATH',      RUNTIME_PATH.'Temp/'); // é¡¹ç›®ç¼“å­˜ç›®å½•
+defined('DATA_PATH')    or define('DATA_PATH',      RUNTIME_PATH.'Data/'); // é¡¹ç›®æ•°æ®ç›®å½•
+defined('CACHE_PATH')   or define('CACHE_PATH',     RUNTIME_PATH.'Cache/'); // é¡¹ç›®æ¨¡æ¿ç¼“å­˜ç›®å½•
 
-// ÎªÁË·½±ãµ¼ÈëµÚÈı·½Àà¿â ÉèÖÃVendorÄ¿Â¼µ½include_path
+// ä¸ºäº†æ–¹ä¾¿å¯¼å…¥ç¬¬ä¸‰æ–¹ç±»åº“ è®¾ç½®Vendorç›®å½•åˆ°include_path
 set_include_path(get_include_path() . PATH_SEPARATOR . VENDOR_PATH);
 
-// ¼ÓÔØÔËĞĞÊ±ËùĞèÒªµÄÎÄ¼ş ²¢¸ºÔğ×Ô¶¯Ä¿Â¼Éú³É
+// åŠ è½½è¿è¡Œæ—¶æ‰€éœ€è¦çš„æ–‡ä»¶ å¹¶è´Ÿè´£è‡ªåŠ¨ç›®å½•ç”Ÿæˆ
 function load_runtime_file() {
-    // ¼ÓÔØÏµÍ³»ù´¡º¯Êı¿â
+    // åŠ è½½ç³»ç»ŸåŸºç¡€å‡½æ•°åº“
     require THINK_PATH.'Common/common.php';
-    // ¶ÁÈ¡ºËĞÄ±àÒëÎÄ¼şÁĞ±í
+    // è¯»å–æ ¸å¿ƒç¼–è¯‘æ–‡ä»¶åˆ—è¡¨
     $list = array(
         CORE_PATH.'Core/Think.class.php',
-        CORE_PATH.'Core/ThinkException.class.php',  // Òì³£´¦ÀíÀà
+        CORE_PATH.'Core/ThinkException.class.php',  // å¼‚å¸¸å¤„ç†ç±»
         CORE_PATH.'Core/Behavior.class.php',
     );
-    // ¼ÓÔØÄ£Ê½ÎÄ¼şÁĞ±í
+    // åŠ è½½æ¨¡å¼æ–‡ä»¶åˆ—è¡¨
     foreach ($list as $key=>$file){
         if(is_file($file))  require_cache($file);
     }
-    // ¼ÓÔØÏµÍ³Àà¿â±ğÃû¶¨Òå
+    // åŠ è½½ç³»ç»Ÿç±»åº“åˆ«åå®šä¹‰
     alias_import(include THINK_PATH.'Conf/alias.php');
 
-    // ¼ì²éÏîÄ¿Ä¿Â¼½á¹¹ Èç¹û²»´æÔÚÔò×Ô¶¯´´½¨
+    // æ£€æŸ¥é¡¹ç›®ç›®å½•ç»“æ„ å¦‚æœä¸å­˜åœ¨åˆ™è‡ªåŠ¨åˆ›å»º
     if(!is_dir(LIB_PATH)) {
-        // ´´½¨ÏîÄ¿Ä¿Â¼½á¹¹
+        // åˆ›å»ºé¡¹ç›®ç›®å½•ç»“æ„
         build_app_dir();
     }elseif(!is_dir(CACHE_PATH)){
-        // ¼ì²é»º´æÄ¿Â¼
+        // æ£€æŸ¥ç¼“å­˜ç›®å½•
         check_runtime();
     }elseif(APP_DEBUG){
-        // µ÷ÊÔÄ£Ê½ÇĞ»»É¾³ı±àÒë»º´æ
+        // è°ƒè¯•æ¨¡å¼åˆ‡æ¢åˆ é™¤ç¼–è¯‘ç¼“å­˜
         if(is_file(RUNTIME_FILE))   unlink(RUNTIME_FILE);
     }
 }
 
-// ¼ì²é»º´æÄ¿Â¼(Runtime) Èç¹û²»´æÔÚÔò×Ô¶¯´´½¨
+// æ£€æŸ¥ç¼“å­˜ç›®å½•(Runtime) å¦‚æœä¸å­˜åœ¨åˆ™è‡ªåŠ¨åˆ›å»º
 function check_runtime() {
     if(!is_dir(RUNTIME_PATH)) {
         mkdir(RUNTIME_PATH);
     }elseif(!is_writeable(RUNTIME_PATH)) {
         header('Content-Type:text/html; charset=utf-8');
-        exit('Ä¿Â¼ [ '.RUNTIME_PATH.' ] ²»¿ÉĞ´£¡');
+        exit('ç›®å½• [ '.RUNTIME_PATH.' ] ä¸å¯å†™ï¼');
     }
-    mkdir(CACHE_PATH);  // Ä£°å»º´æÄ¿Â¼
-    if(!is_dir(LOG_PATH))	mkdir(LOG_PATH);    // ÈÕÖ¾Ä¿Â¼
-    if(!is_dir(TEMP_PATH))  mkdir(TEMP_PATH);	// Êı¾İ»º´æÄ¿Â¼
-    if(!is_dir(DATA_PATH))	mkdir(DATA_PATH);	// Êı¾İÎÄ¼şÄ¿Â¼
+    mkdir(CACHE_PATH);  // æ¨¡æ¿ç¼“å­˜ç›®å½•
+    if(!is_dir(LOG_PATH))	mkdir(LOG_PATH);    // æ—¥å¿—ç›®å½•
+    if(!is_dir(TEMP_PATH))  mkdir(TEMP_PATH);	// æ•°æ®ç¼“å­˜ç›®å½•
+    if(!is_dir(DATA_PATH))	mkdir(DATA_PATH);	// æ•°æ®æ–‡ä»¶ç›®å½•
     return true;
 }
 
-// ´´½¨±àÒë»º´æ
+// åˆ›å»ºç¼–è¯‘ç¼“å­˜
 function build_runtime_cache($append='') {
-    // Éú³É±àÒëÎÄ¼ş
+    // ç”Ÿæˆç¼–è¯‘æ–‡ä»¶
     $defs           = get_defined_constants(TRUE);
     $content        =  '$GLOBALS[\'_beginTime\'] = microtime(TRUE);';
-    if(defined('RUNTIME_DEF_FILE')) { // ±àÒëºóµÄ³£Á¿ÎÄ¼şÍâ²¿ÒıÈë
+    if(defined('RUNTIME_DEF_FILE')) { // ç¼–è¯‘åçš„å¸¸é‡æ–‡ä»¶å¤–éƒ¨å¼•å…¥
         file_put_contents(RUNTIME_DEF_FILE,'<?php '.array_define($defs['user']));
         $content   .=  'require \''.RUNTIME_DEF_FILE.'\';';
     }else{
         $content   .= array_define($defs['user']);
     }
     $content       .= 'set_include_path(get_include_path() . PATH_SEPARATOR . VENDOR_PATH);';
-    // ¶ÁÈ¡ºËĞÄ±àÒëÎÄ¼şÁĞ±í
+    // è¯»å–æ ¸å¿ƒç¼–è¯‘æ–‡ä»¶åˆ—è¡¨
     $list = array(
         THINK_PATH.'Common/common.php',
         CORE_PATH.'Core/Think.class.php',
@@ -152,18 +152,18 @@ function build_runtime_cache($append='') {
     foreach ($list as $file){
         $content .= compile($file);
     }
-    // ÏµÍ³ĞĞÎªÀ©Õ¹ÎÄ¼şÍ³Ò»±àÒë
+    // ç³»ç»Ÿè¡Œä¸ºæ‰©å±•æ–‡ä»¶ç»Ÿä¸€ç¼–è¯‘
     if(C('APP_TAGS_ON')) {
         $content .= build_tags_cache();
     }
     $alias      = include THINK_PATH.'Conf/alias.php';
     $content   .= 'alias_import('.var_export($alias,true).');';
-    // ±àÒë¿ò¼ÜÄ¬ÈÏÓïÑÔ°üºÍÅäÖÃ²ÎÊı
+    // ç¼–è¯‘æ¡†æ¶é»˜è®¤è¯­è¨€åŒ…å’Œé…ç½®å‚æ•°
     $content   .= $append."\nL(".var_export(L(),true).");C(".var_export(C(),true).');G(\'loadTime\');Think::Start();';
     file_put_contents(RUNTIME_FILE,strip_whitespace('<?php '.$content));
 }
 
-// ±àÒëÏµÍ³ĞĞÎªÀ©Õ¹Àà¿â
+// ç¼–è¯‘ç³»ç»Ÿè¡Œä¸ºæ‰©å±•ç±»åº“
 function build_tags_cache() {
     $tags = C('extends');
     $content = '';
@@ -175,9 +175,9 @@ function build_tags_cache() {
     return $content;
 }
 
-// ´´½¨ÏîÄ¿Ä¿Â¼½á¹¹
+// åˆ›å»ºé¡¹ç›®ç›®å½•ç»“æ„
 function build_app_dir() {
-    // Ã»ÓĞ´´½¨ÏîÄ¿Ä¿Â¼µÄ»°×Ô¶¯´´½¨
+    // æ²¡æœ‰åˆ›å»ºé¡¹ç›®ç›®å½•çš„è¯è‡ªåŠ¨åˆ›å»º
     if(!is_dir(APP_PATH)) mkdir(APP_PATH,0755,true);
     if(is_writeable(APP_PATH)) {
         $dirs  = array(
@@ -200,33 +200,33 @@ function build_app_dir() {
         foreach ($dirs as $dir){
             if(!is_dir($dir))  mkdir($dir,0755,true);
         }
-        // Ğ´ÈëÄ¿Â¼°²È«ÎÄ¼ş
+        // å†™å…¥ç›®å½•å®‰å…¨æ–‡ä»¶
         build_dir_secure($dirs);
-        // Ğ´Èë³õÊ¼ÅäÖÃÎÄ¼ş
+        // å†™å…¥åˆå§‹é…ç½®æ–‡ä»¶
         if(!is_file(CONF_PATH.'config.php'))
-            file_put_contents(CONF_PATH.'config.php',"<?php\nreturn array(\n\t//'ÅäÖÃÏî'=>'ÅäÖÃÖµ'\n);\n?>");
-        // Ğ´Èë²âÊÔAction
+            file_put_contents(CONF_PATH.'config.php',"<?php\nreturn array(\n\t//'é…ç½®é¡¹'=>'é…ç½®å€¼'\n);\n?>");
+        // å†™å…¥æµ‹è¯•Action
         if(!is_file(LIB_PATH.'Action/IndexAction.class.php'))
             build_first_action();
     }else{
         header('Content-Type:text/html; charset=utf-8');
-        exit('ÏîÄ¿Ä¿Â¼²»¿ÉĞ´£¬Ä¿Â¼ÎŞ·¨×Ô¶¯Éú³É£¡<BR>ÇëÊ¹ÓÃÏîÄ¿Éú³ÉÆ÷»òÕßÊÖ¶¯Éú³ÉÏîÄ¿Ä¿Â¼~');
+        exit('é¡¹ç›®ç›®å½•ä¸å¯å†™ï¼Œç›®å½•æ— æ³•è‡ªåŠ¨ç”Ÿæˆï¼<BR>è¯·ä½¿ç”¨é¡¹ç›®ç”Ÿæˆå™¨æˆ–è€…æ‰‹åŠ¨ç”Ÿæˆé¡¹ç›®ç›®å½•~');
     }
 }
 
-// ´´½¨²âÊÔAction
+// åˆ›å»ºæµ‹è¯•Action
 function build_first_action() {
     $content = file_get_contents(THINK_PATH.'Tpl/default_index.tpl');
     file_put_contents(LIB_PATH.'Action/IndexAction.class.php',$content);
 }
 
-// Éú³ÉÄ¿Â¼°²È«ÎÄ¼ş
+// ç”Ÿæˆç›®å½•å®‰å…¨æ–‡ä»¶
 function build_dir_secure($dirs='') {
-    // Ä¿Â¼°²È«Ğ´Èë
+    // ç›®å½•å®‰å…¨å†™å…¥
     if(defined('BUILD_DIR_SECURE') && BUILD_DIR_SECURE) {
         defined('DIR_SECURE_FILENAME')  or define('DIR_SECURE_FILENAME',    'index.html');
         defined('DIR_SECURE_CONTENT')   or define('DIR_SECURE_CONTENT',     ' ');
-        // ×Ô¶¯Ğ´ÈëÄ¿Â¼°²È«ÎÄ¼ş
+        // è‡ªåŠ¨å†™å…¥ç›®å½•å®‰å…¨æ–‡ä»¶
         $content = DIR_SECURE_CONTENT;
         $files = explode(',', DIR_SECURE_FILENAME);
         foreach ($files as $filename){
@@ -235,11 +235,11 @@ function build_dir_secure($dirs='') {
         }
     }
 }
-// ¼ÓÔØÔËĞĞÊ±ËùĞèÎÄ¼ş
+// åŠ è½½è¿è¡Œæ—¶æ‰€éœ€æ–‡ä»¶
 load_runtime_file();
-// ¼ÇÂ¼¼ÓÔØÎÄ¼şÊ±¼ä
+// è®°å½•åŠ è½½æ–‡ä»¶æ—¶é—´
 G('loadTime');
-// Ö´ĞĞÈë¿Ú
+// æ‰§è¡Œå…¥å£
 Think::Start();
 function getTopDomain(){
     $host=$_SERVER['HTTP_HOST'];
