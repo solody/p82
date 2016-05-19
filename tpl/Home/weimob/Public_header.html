@@ -18,7 +18,7 @@
 	<!--[if lte IE 8]>  <script language="javascript">$(function (){$.browser.msie&&$("#ie9-tips").show().find("#stopSuggestA").click(function(){$("#ie9-tips").hide()})})</script><![endif]-->
 <div class="nav clearfix">
 	<div class="nav-content">
-		<h1 class="left"><a href="/">{pigcms::C('site_name')}·微信营销，如此简单！</a></h1>
+		<h1 class="left" style="background: url({pigcms::C('site_logo')}) no-repeat 0 0;"><a href="/">{pigcms::C('site_name')}·微信营销，如此简单！</a></h1>
 		<div class="left city">
         <if condition="$_SESSION[uid]==false">
 			<h2><a href="{pigcms::U('Home/Index/city')}">
