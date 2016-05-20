@@ -150,6 +150,9 @@ class UsersAction extends BaseAction{
 		return $randStr;
 	}
 	public function checkreg(){
+	    $index_action = new IndexAction();
+	    $index_action->checkIfOpenReg();
+	    
 		$db=D('Users');
 		$info=M('User_group')->find(1);
 		$verifycode=$this->_post('verifycode','md5',0);

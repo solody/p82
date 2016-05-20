@@ -222,6 +222,8 @@ class IndexAction extends BaseAction{
 
 
 	public function login(){
+	    $this->checkIfOpenReg();
+	    
 		$business = include('./PigCms/Lib/ORG/Business.php');
 		$i=0;
 		foreach ($business as $k => $v){
@@ -233,6 +235,8 @@ class IndexAction extends BaseAction{
 		$this->display('login');
 	}
 	public function reg(){
+	    $this->checkIfOpenReg();
+	    
 		$business = include('./PigCms/Lib/ORG/Business.php');
 		$i=0;
 		foreach ($business as $k => $v){
@@ -242,6 +246,13 @@ class IndexAction extends BaseAction{
 		}
 		$this->assign('business',$data);
 		$this->display('login');
+	}
+	
+	public function checkIfOpenReg() {
+	    if (boolval(C('isclosekuser'))){
+	        echo '系统没有开放注册！';
+	        exit();
+	    }
 	}
 	/*
 	public function printtest(){
